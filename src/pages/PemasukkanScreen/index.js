@@ -8,14 +8,16 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {Button, Gap, HeaderPrimary, ItemCardList} from '../../components';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {openDatabase} from 'react-native-sqlite-storage';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 const PemasukkanScreen = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const {listPemasukan} = useSelector(state => state.globalReducer);
-  console.log('listPemasukan', listPemasukan);
+  console.log(listPemasukan);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefresh] = useState(false);
 
@@ -28,7 +30,7 @@ const PemasukkanScreen = () => {
         for (let i = 0; i < results.rows.length; ++i) {
           temp.push(results.rows.item(i));
         }
-        console.log('temp', temp);
+        temp.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
         dispatch({
           type: 'SET_LIST_PEMASUKAN',
           value: temp,
@@ -84,7 +86,7 @@ const PemasukkanScreen = () => {
           ) : (
             <View
               style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-              <Text>Data Kosong</Text>
+              <Text style={styles.text}>Data Kosong</Text>
             </View>
           )}
         </View>
@@ -103,5 +105,9 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row-reverse',
     marginHorizontal: 15,
+  },
+  text: {
+    fontSize: RFValue(14),
+    color: '#666',
   },
 });

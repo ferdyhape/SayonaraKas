@@ -6,16 +6,18 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch} from 'react-redux';
 import {showMessage, useForm} from '../../utils';
 import {openDatabase} from 'react-native-sqlite-storage';
+import moment from 'moment';
+import DatePicker from 'react-native-date-picker';
 
 const CreatePengeluaran = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const [modalVisible, setModalVisible] = useState(false);
   const [form, setForm] = useForm({
     nominal: '',
     keterangan: '',
     date: new Date(),
   });
-  const [modalVisible, setModalVisible] = useState(false);
 
   const db = openDatabase({name: 'mydb.db'});
 
@@ -27,7 +29,8 @@ const CreatePengeluaran = () => {
         (tx, results) => {
           console.log('Results', results.rowsAffected);
           if (results.rowsAffected > 0) {
-            selectDataPemasukkan();
+            console.log('masuk');
+            selectDataPengeluaran();
             showMessage('Data berhasil disimpan', 'success');
             navigation.goBack();
           } else {
@@ -47,6 +50,7 @@ const CreatePengeluaran = () => {
         for (let i = 0; i < results.rows.length; ++i) {
           temp.push(results.rows.item(i));
         }
+        temp.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
         dispatch({
           type: 'SET_LIST_PENGELUARAN',
           value: temp,
@@ -74,27 +78,48 @@ const CreatePengeluaran = () => {
           lable="Nominal"
           placeholder="Masukkan nominal"
           keyboardType="number-pad"
-          value=""
-          onChangeText={() => {}}
+          value={form.nominal}
+          onChangeText={value => setForm('nominal', value)}
+          placeholderTextColor="#ccc"
+          stylesTextInput={{color: '#000'}}
         />
         <Gap height={15} />
         <TextInput
           lable="Catatan"
           placeholder="Masukkan nama pemasukkan"
-          value=""
-          onChangeText={() => {}}
+          value={form.keterangan}
+          onChangeText={value => setForm('keterangan', value)}
+          placeholderTextColor="#ccc"
+          stylesTextInput={{color: '#000'}}
         />
         <Gap height={15} />
         <Text style={{fontSize: 14, color: '#000'}}>Tanggal</Text>
         <Gap height={5} />
         <View style={styles.containerDate}>
           <MaterialIcons name="date-range" size={24} color="black" />
-          <Text style={styles.text}>Senin, 22 Januari 2023</Text>
+          <Text style={styles.text}>
+            {moment(form.date).format('dddd, DD MMMM YYYY')}
+          </Text>
         </View>
       </View>
       <View style={styles.btnButtom}>
-        <Button title="Simpan" onPress={() => onHandleSubmit()} />
+        <Button
+          title="Simpan"
+          onPress={() => onHandleSubmit()}
+          stylesButton={{backgroundColor: '#FF5B37'}}
+        />
       </View>
+      <DatePicker
+        modal
+        mode="date"
+        open={modalVisible}
+        date={form.date}
+        onConfirm={date => {
+          setModalVisible(false);
+          setForm('date', date);
+        }}
+        onCancel={() => setModalVisible(false)}
+      />
     </SafeAreaView>
   );
 };

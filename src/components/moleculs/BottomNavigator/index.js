@@ -15,25 +15,25 @@ const Icon = ({label, focus}) => {
   switch (label) {
     case 'Dashboard':
       return focus ? (
-        <AntDesign name="home" size={24} color="#634D92" />
+        <AntDesign name="home" size={24} color="#476C9B" />
       ) : (
         <AntDesign name="home" size={24} color="#BDBDBD" />
       );
     case 'Pemasukkan':
       return focus ? (
-        <Entypo name="documents" size={24} color="#634D92" />
+        <Entypo name="documents" size={24} color="#476C9B" />
       ) : (
         <Entypo name="documents" size={24} color="#BDBDBD" />
       );
     case 'Pengeluaran':
       return focus ? (
-        <Entypo name="news" size={24} color="#634D92" />
+        <Entypo name="news" size={24} color="#476C9B" />
       ) : (
         <Entypo name="news" size={24} color="#BDBDBD" />
       );
     default:
       return focus ? (
-        <AntDesign name="user" size={24} color="#634D92" />
+        <AntDesign name="user" size={24} color="#476C9B" />
       ) : (
         <AntDesign name="user" size={24} color="#BDBDBD" />
       );
@@ -129,6 +129,6 @@ const styles = StyleSheet.create({
   text: isFocused => ({
     fontSize: RFValue(12),
     fontFamily: 'Poppins-Regular',
-    color: isFocused ? '#634D92' : '#BDBDBD',
+    color: isFocused ? '#476C9B' : '#BDBDBD',
   }),
 });

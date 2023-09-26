@@ -54,6 +54,7 @@ const CreatePemasukkan = () => {
         for (let i = 0; i < results.rows.length; ++i) {
           temp.push(results.rows.item(i));
         }
+        temp.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
         dispatch({
           type: 'SET_LIST_PEMASUKAN',
           value: temp,
@@ -84,6 +85,8 @@ const CreatePemasukkan = () => {
           keyboardType="number-pad"
           value={form.nominal}
           onChangeText={value => setForm('nominal', value)}
+          placeholderTextColor="#ccc"
+          stylesTextInput={{color: '#000'}}
         />
         <Gap height={15} />
         <TextInput
@@ -91,6 +94,8 @@ const CreatePemasukkan = () => {
           placeholder="Masukkan nama pemasukkan"
           value={form.keterangan}
           onChangeText={value => setForm('keterangan', value)}
+          placeholderTextColor="#ccc"
+          stylesTextInput={{color: '#000'}}
         />
         <Gap height={15} />
         <Text style={{fontSize: 14, color: '#000'}}>Tanggal</Text>

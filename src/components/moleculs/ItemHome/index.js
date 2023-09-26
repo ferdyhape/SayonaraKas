@@ -1,10 +1,11 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {screenHeight, screenWidth} from '../../../utils';
+import {convertToRupiah, screenHeight, screenWidth} from '../../../utils';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Gap} from '../../atomics';
 import {RFValue} from 'react-native-responsive-fontsize';
-const ItemHome = ({type}) => {
+
+const ItemHome = ({type, dataPengeluaran, dataPemasukkan}) => {
   return (
     <View style={styles.container}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -14,11 +15,18 @@ const ItemHome = ({type}) => {
           <AntDesign name="login" size={16} color="black" />
         )}
         <Gap width={10} />
-        <Text style={styles.text}>{type === 'logout' ? 'Pengeluaran' : 'Pemasukan'}</Text>
+        <Text style={styles.text}>
+          {type === 'logout' ? 'Pengeluaran' : 'Pemasukan'}
+        </Text>
       </View>
       <Gap height={10} />
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Text style={styles.desc}>Rp12000</Text>
+        <Text style={styles.desc(type)}>
+          {type === 'logout' ? '-' : '+'}
+          {type === 'logout'
+            ? convertToRupiah(dataPengeluaran)
+            : convertToRupiah(dataPemasukkan)}
+        </Text>
       </View>
     </View>
   );
@@ -28,7 +36,7 @@ export default ItemHome;
 
 const styles = StyleSheet.create({
   container: {
-    width: screenWidth / 2 - 50,
+    width: screenWidth / 2 - 30,
     height: screenHeight / 5,
     borderWidth: 2,
     borderColor: '#ADD9F4',
@@ -42,9 +50,9 @@ const styles = StyleSheet.create({
     fontSize: RFValue(12),
     color: '#000',
   },
-  desc: {
+  desc: type => ({
     fontSize: RFValue(14),
     fontWeight: 'bold',
-    color: '#C4C4C4',
-  },
+    color: type === 'logout' ? '#990000' : '#14C38E',
+  }),
 });

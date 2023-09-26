@@ -16,7 +16,7 @@ const ItemCardList = ({type, nominal, tanggal, keterangan}) => {
           </View>
         ) : (
           <View style={styles.wpIcon(type)}>
-            <Entypo name="log-out" size={18} color="#fff" />
+            <Entypo name="log-out" size={18} color="#666" />
           </View>
         )}
         <Gap width={10} />
@@ -28,7 +28,9 @@ const ItemCardList = ({type, nominal, tanggal, keterangan}) => {
         </View>
       </View>
       <View style={{alignItems: 'flex-end'}}>
-        <Text style={styles.desc}>Rp{nominal}</Text>
+        <Text style={styles.nominal(type)}>
+          {type === 'logout' ? '-' : '+'}Rp{nominal}
+        </Text>
         <Text style={styles.desc}>
           {moment(tanggal).format('DD MMMM YYYY')}
         </Text>
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderWidth: 1,
-    borderColor: '#CCC',
+    borderColor: '#EEE',
     marginHorizontal: 15,
     paddingHorizontal: 15,
     paddingVertical: 10,
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
   wpIcon: type => ({
     width: RFValue(35),
     height: RFValue(35),
-    backgroundColor: type === 'logout' ? '#990000' : '#14C38E',
+    backgroundColor: type === 'logout' ? '#990000' : '#B8F1B0',
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -67,4 +69,8 @@ const styles = StyleSheet.create({
     fontSize: RFValue(11),
     color: '#666',
   },
+  nominal: type => ({
+    fontSize: RFValue(12),
+    color: type === 'logout' ? '#990000' : '#03C988',
+  }),
 });

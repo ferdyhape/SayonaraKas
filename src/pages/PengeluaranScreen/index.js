@@ -9,13 +9,14 @@ import {
 import React, {useEffect, useState} from 'react';
 import {Button, Gap, HeaderPrimary, ItemCardList} from '../../components';
 import {useNavigation} from '@react-navigation/native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {openDatabase} from 'react-native-sqlite-storage';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const PengeluaranScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const {listPengeluaran} = useSelector(state => state.globalReducer);
-  console.log('listPengeluaran', listPengeluaran);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefresh] = useState(false);
 
@@ -82,7 +83,7 @@ const PengeluaranScreen = () => {
             })
           ) : (
             <View style={styles.center}>
-              <Text style={{color: '#FF5B37', fontSize: 16}}>Data Kosong</Text>
+              <Text style={styles.text}>Data Kosong</Text>
             </View>
           )}
         </View>
@@ -106,5 +107,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  text: {
+    fontSize: RFValue(14),
+    color: '#666',
   },
 });
