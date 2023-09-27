@@ -5,7 +5,7 @@ import {robot3} from '../../assets';
 import {getData} from '../../utils';
 import {useDispatch} from 'react-redux';
 import {openDatabase} from 'react-native-sqlite-storage';
-import {checkDataUser} from '../../redux/actions';
+import {checkDataUser, selectDataPemasukkan, selectDataPengeluaran} from '../../redux/actions';
 
 const SplashScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -27,6 +27,8 @@ const SplashScreen = ({navigation}) => {
 
   useEffect(() => {
     dispatch(checkDataUser(db));
+    dispatch(selectDataPemasukkan(db));
+    dispatch(selectDataPengeluaran(db));
     setTimeout(() => {
       navigation.reset({index: 0, routes: [{name: 'LoginScreen'}]});
     }, 3000);

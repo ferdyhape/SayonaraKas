@@ -6,6 +6,7 @@ import CreatePemasukkan from './CreatePemasukkan';
 import CreatePengeluaran from './CreatePengeluaran';
 import LoginScreen from './LoginScreen';
 import SettingScreen from './SettingScreen';
+import ForgotPassword from './ForgotPassword';
 
 export {
   SplashScreen,
@@ -16,4 +17,5 @@ export {
   CreatePengeluaran,
   LoginScreen,
   SettingScreen,
+  ForgotPassword,
 };

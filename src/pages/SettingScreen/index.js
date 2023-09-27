@@ -1,8 +1,8 @@
 import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Button, Gap, HeaderPrimary, TitleSection} from '../../components';
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
 
 const SettingScreen = () => {
   const navigation = useNavigation();
@@ -29,7 +29,7 @@ const SettingScreen = () => {
           </View>
           <View style={styles.row}>
             <Text style={styles.txt}>Nim</Text>
-            <Text style={styles.desc}>12345678</Text>
+            <Text style={styles.desc}>2141764028</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.txt}>Tanggal Lahir</Text>
@@ -42,18 +42,13 @@ const SettingScreen = () => {
         <View style={{paddingHorizontal: 15}}>
           <Button
             title="Edit Password"
-            onPress={() =>
-              navigation.reset({index: 0, routes: [{name: 'Login'}]})
-            }
+            onPress={() => navigation.navigate('ForgotPassword')}
             type={'secondary'}
             stylesText={{color: '#666'}}
           />
           <Gap height={10} />
           <Button
             title="Logout"
-            onPress={() =>
-              navigation.reset({index: 0, routes: [{name: 'Login'}]})
-            }
             type={'secondary'}
             stylesText={{color: '#666'}}
             onPress={() => {

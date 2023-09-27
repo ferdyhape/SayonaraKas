@@ -51,7 +51,7 @@ export const checkDataPemasukan = (db, startDate, endDate) => dispatch => {
         }
         temp.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
         // dispatch({
-        //   type: 'SET_LIST_PEMASUKAN',
+        //   type: 'SET_LIST_PEMASUKAN2',
         //   value: temp,
         // });
         dispatch({
@@ -79,7 +79,7 @@ export const checkDataPengeluaran = (db, startDate, endDate) => dispatch => {
         }
         temp.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
         // dispatch({
-        //   type: 'SET_LIST_PENGELUARAN',
+        //   type: 'SET_LIST_PENGELUARAN2',
         //   value: temp,
         // });
         dispatch({
@@ -88,5 +88,38 @@ export const checkDataPengeluaran = (db, startDate, endDate) => dispatch => {
         });
       },
     );
+  });
+};
+
+export const selectDataPemasukkan = db => dispatch => {
+  db.transaction(tx => {
+    tx.executeSql('SELECT * FROM pemasukan', [], (tx, results) => {
+      let temp = [];
+      for (let i = 0; i < results.rows.length; ++i) {
+        temp.push(results.rows.item(i));
+      }
+      temp.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
+      dispatch({
+        type: 'SET_LIST_PEMASUKAN2',
+        value: temp,
+      });
+    });
+  });
+};
+
+export const selectDataPengeluaran = db => dispatch => {
+  db.transaction(tx => {
+    tx.executeSql('SELECT * FROM pengeluaran', [], (tx, results) => {
+      let temp = [];
+      for (let i = 0; i < results.rows.length; ++i) {
+        temp.push(results.rows.item(i));
+      }
+      temp.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
+      console.log('PENGELUARAN', temp);
+      dispatch({
+        type: 'SET_LIST_PENGELUARAN2',
+        value: temp,
+      });
+    });
   });
 };

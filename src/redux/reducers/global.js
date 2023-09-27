@@ -4,6 +4,8 @@ const initGlobalState = {
   user: {},
   listPemasukan: [],
   listPengeluaran: [],
+  listPemasukan2: [],
+  listPengeluaran2: [],
   totalPemasukan: 0,
   totalPengeluaran: 0,
 };
@@ -42,6 +44,20 @@ export const globalReducer = (state = initGlobalState, action) => {
     return {
       ...state,
       listPengeluaran: action.value,
+    };
+  }
+
+  if (action.type === 'SET_LIST_PEMASUKAN2') {
+    return {
+      ...state,
+      listPemasukan2: action.value,
+    };
+  }
+
+  if (action.type === 'SET_LIST_PENGELUARAN2') {
+    return {
+      ...state,
+      listPengeluaran2: action.value,
     };
   }
 

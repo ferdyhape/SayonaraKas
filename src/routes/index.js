@@ -11,6 +11,7 @@ const {
   CreatePengeluaran,
   LoginScreen,
   SettingScreen,
+  ForgotPassword,
 } = require('../pages');
 
 const Stack = createNativeStackNavigator();
@@ -69,6 +70,11 @@ const Router = () => {
       <Stack.Screen
         name="LoginScreen"
         component={LoginScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPassword}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
