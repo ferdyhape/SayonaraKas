@@ -9,6 +9,8 @@ const {
   PengeluaranScreen,
   CreatePemasukkan,
   CreatePengeluaran,
+  LoginScreen,
+  SettingScreen,
 } = require('../pages');
 
 const Stack = createNativeStackNavigator();
@@ -32,11 +34,11 @@ const MainApp = () => {
         component={PengeluaranScreen}
         options={{headerShown: false}}
       />
-      {/* <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
+      <Tab.Screen
+        name="setting"
+        component={SettingScreen}
         options={{headerShown: false}}
-      /> */}
+      />
     </Tab.Navigator>
   );
 };
@@ -62,6 +64,11 @@ const Router = () => {
       <Stack.Screen
         name="CreatePengeluaran"
         component={CreatePengeluaran}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="LoginScreen"
+        component={LoginScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

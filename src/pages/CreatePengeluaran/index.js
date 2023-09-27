@@ -1,4 +1,4 @@
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import {Button, Gap, HeaderPrimary, TextInput} from '../../components';
 import {useNavigation} from '@react-navigation/native';
@@ -95,12 +95,12 @@ const CreatePengeluaran = () => {
         <Gap height={15} />
         <Text style={{fontSize: 14, color: '#000'}}>Tanggal</Text>
         <Gap height={5} />
-        <View style={styles.containerDate}>
+        <TouchableOpacity style={styles.containerDate} onPress={() => setModalVisible(true)}>
           <MaterialIcons name="date-range" size={24} color="black" />
           <Text style={styles.text}>
             {moment(form.date).format('dddd, DD MMMM YYYY')}
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.btnButtom}>
         <Button

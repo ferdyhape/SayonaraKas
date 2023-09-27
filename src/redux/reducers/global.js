@@ -1,5 +1,6 @@
 const initGlobalState = {
   isError: false,
+  user: {},
   listPemasukan: [],
   listPengeluaran: [],
   totalPemasukan: 0,
@@ -12,6 +13,13 @@ export const globalReducer = (state = initGlobalState, action) => {
       ...state,
       isError: action.value.isError,
       message: action.value.message,
+    };
+  }
+
+  if (action.type === 'SET_USER') {
+    return {
+      ...state,
+      user: action.value,
     };
   }
 

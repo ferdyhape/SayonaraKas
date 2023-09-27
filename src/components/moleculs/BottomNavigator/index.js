@@ -21,21 +21,21 @@ const Icon = ({label, focus}) => {
       );
     case 'Pemasukkan':
       return focus ? (
-        <Entypo name="documents" size={24} color="#476C9B" />
+        <Entypo name="login" size={24} color="#476C9B" />
       ) : (
-        <Entypo name="documents" size={24} color="#BDBDBD" />
+        <Entypo name="login" size={24} color="#BDBDBD" />
       );
     case 'Pengeluaran':
       return focus ? (
-        <Entypo name="news" size={24} color="#476C9B" />
+        <Entypo name="log-out" size={24} color="#476C9B" />
       ) : (
-        <Entypo name="news" size={24} color="#BDBDBD" />
+        <Entypo name="log-out" size={24} color="#BDBDBD" />
       );
     default:
       return focus ? (
-        <AntDesign name="user" size={24} color="#476C9B" />
+        <AntDesign name="setting" size={24} color="#476C9B" />
       ) : (
-        <AntDesign name="user" size={24} color="#BDBDBD" />
+        <AntDesign name="setting" size={24} color="#BDBDBD" />
       );
   }
 

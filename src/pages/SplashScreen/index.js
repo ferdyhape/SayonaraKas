@@ -5,15 +5,17 @@ import {robot3} from '../../assets';
 import {getData} from '../../utils';
 import {useDispatch} from 'react-redux';
 import {openDatabase} from 'react-native-sqlite-storage';
+import {checkDataUser} from '../../redux/actions';
 
 const SplashScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
-  // create table user di sqlite
   const db = openDatabase({name: 'mydb.db'});
 
-  // create table user di sqlite
   db.transaction(tx => {
+    tx.executeSql(
+      'CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)',
+    );
     tx.executeSql(
       'CREATE TABLE IF NOT EXISTS pemasukan (id INTEGER PRIMARY KEY AUTOINCREMENT, nominal TEXT, tanggal TEXT,  keterangan TEXT)',
     );
@@ -24,8 +26,9 @@ const SplashScreen = ({navigation}) => {
   });
 
   useEffect(() => {
+    dispatch(checkDataUser(db));
     setTimeout(() => {
-      navigation.reset({index: 0, routes: [{name: 'MainApp'}]});
+      navigation.reset({index: 0, routes: [{name: 'LoginScreen'}]});
     }, 3000);
   }, []);
   return (
