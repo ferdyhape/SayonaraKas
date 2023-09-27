@@ -28,8 +28,10 @@ const LoginScreen = () => {
     } else {
       if (form.username === user.username && form.password === user.password) {
         showMessage('Login Berhasil', 'success');
+        dispatch({type: 'SET_LOGIN', value: true});
         navigation.reset({index: 0, routes: [{name: 'MainApp'}]});
       } else {
+        dispatch({type: 'SET_LOGIN', value: false});
         showMessage('Username atau Password salah', 'danger');
       }
     }
@@ -63,16 +65,12 @@ const LoginScreen = () => {
           stylesTextInput={{color: '#000'}}
           secureTextEntry={true}
         />
-        <Gap height={5} />
-        <TouchableOpacity style={{alignItems: 'flex-end'}}>
-          <Text style={styles.txtForget}>Forgot Password</Text>
-        </TouchableOpacity>
-        <Gap height={15} />
+        <Gap height={20} />
         <View style={styles.btnButtom}>
           <Button
             title="Login"
             onPress={() => onHandleSubmit()}
-            stylesButton={{backgroundColor: '#FF5B37'}}
+            stylesButton={{backgroundColor: '#476C9B'}}
           />
         </View>
       </View>

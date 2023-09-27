@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     paddingVertical: 9,
     paddingHorizontal: 10,
     borderWidth: 1,
-    borderColor: type === 'secondary' ? '#009688' : '#fff',
+    borderColor: type === 'secondary' ? '#476C9B' : '#fff',
   }),
   lable: type => ({
     fontSize: RFValue(14),
